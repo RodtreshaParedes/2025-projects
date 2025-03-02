@@ -19,9 +19,8 @@ const buttonVariants = cva(
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
         glassmorphism:
-          'px-4 py-2 rounded-lg bg-white/10 dark:bg-gray-800/10 backdrop-blur-lg text-black dark:text-white shadow-md hover:bg-white/20 dark:hover:bg-gray-800/20 transition-colors',
-        neumorphism:
-          'p-2 rounded-lg shadow-neumorphism bg-gray-200 dark:bg-gray-700 text-black dark:text-white',
+          'px-4 py-2 rounded-lg bg-white/10 dark:bg-gray-800/10 backdrop-blur-lg text-white shadow-md hover:bg-white/20 dark:hover:bg-gray-800/20 transition-colors',
+        neumorphism: 'p-2 rounded-lg shadow-neumorphism',
       },
       size: {
         default: 'h-10 px-4 py-2',
@@ -51,7 +50,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}
-      />
+      >
+        {props.children}
+      </Comp>
     );
   },
 );
