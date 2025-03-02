@@ -2,7 +2,7 @@ import CurrentWeather from '@/components/current-weather';
 import WeatherSkeleton from '@/components/loading-skeleton';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
-import HourlyTemperature from '@/components/ui/hourly-temperature';
+import HourlyTemperature from '@/components/hourly-temperature';
 import { useGeolocation } from '@/hooks/use-geolocation';
 import {
   useForecastQuery,
@@ -97,13 +97,14 @@ const WeatherDasboard = () => {
           My Location
         </h1>
         <Button
-          variant="outline"
-          size={'icon'}
+          variant="glassmorphism"
+          size="icon"
           onClick={handleRefresh}
           disabled={weatherQuery.isFetching || forecastQuery.isFetching}
+          className="text-blue-500 hover:text-blue-700"
         >
           <RefreshCw
-            className={`h-4 w-4 ${
+            className={`h-5 w-5 ${
               weatherQuery.isFetching ? 'animate-spin' : ''
             }`}
           />
@@ -111,7 +112,7 @@ const WeatherDasboard = () => {
       </div>
 
       <div className="grid gap-6">
-        <div>
+        <div className="flex flex-col lg:flex-row gap-4">
           <CurrentWeather
             data={weatherQuery.data}
             locationName={locationName}

@@ -1,0 +1,8 @@
+.shadow-neumorphism {
+    box-shadow: 8px 8px 16px #d1d9e6, -8px -8px 16px #ffffff;
+    border: none;
+}
+
+.dark .shadow-neumorphism {
+    box-shadow: 8px 8px 16px #1a1a1a, -8px -8px 16px #333333;
+}

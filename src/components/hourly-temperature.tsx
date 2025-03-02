@@ -1,0 +1,94 @@
+import type { ForecastData } from '@/api/types';
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
+import {
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts';
+import { format } from 'date-fns';
+
+interface HourlyTemperatureProps {
+  data: ForecastData;
+}
+
+const HourlyTemperature = ({ data }: HourlyTemperatureProps) => {
+  const chartData = data.list.slice(0, 8).map((item) => ({
+    time: format(new Date(item.dt * 1000), 'h a'),
+    temp: Math.round(item.main.temp),
+    feels_like: Math.round(item.main.feels_like),
+  }));
+
+  return (
+    <Card className="flex-1">
+      <CardHeader>
+        <CardTitle>Today's Temperature</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="h-[200px] w-full">
+          <ResponsiveContainer width={'100%'} height={'100%'}>
+            <LineChart data={chartData}>
+              <XAxis
+                dataKey={'time'}
+                stroke="#9CA3AF"
+                fontSize={12}
+                tickLine={false}
+                axisLine={false}
+              />
+              <YAxis
+                dataKey={'feels_like'}
+                stroke="#9CA3AF"
+                fontSize={12}
+                tickLine={false}
+                axisLine={false}
+                tickFormatter={(value) => `${value}°`}
+              />
+
+              {/* Tooltip */}
+              <Tooltip
+                content={({ active, payload }) => {
+                  if (active && payload && payload.length) {
+                    return (
+                      <div className="rounded-lg border bg-gray-400 p-2 backdrop-filter backdrop-blur-sm bg-opacity-10 shadow-sm">
+                        <div className="grid grid-cols-2 gap-2">
+                          <div className="flex flex-col">
+                            <span>Temperature</span>
+                            <span> {payload[0].value}°</span>
+                          </div>
+                          <div className="flex flex-col">
+                            <span>Feels like</span>
+                            <span> {payload[1].value}°</span>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  }
+                }}
+              />
+
+              <Line
+                type="monotone"
+                dataKey="temp"
+                stroke="#3B82F6"
+                strokeWidth={2}
+                dot={false}
+              />
+              <Line
+                type="monotone"
+                dataKey="feels_like"
+                stroke="#F87171"
+                strokeWidth={2}
+                dot={false}
+                strokeDasharray={'3 3'}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
+
+export default HourlyTemperature;
