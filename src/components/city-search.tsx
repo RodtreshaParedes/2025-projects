@@ -16,14 +16,22 @@ const CitySearch = () => {
 
   return (
     <>
-      <Button variant={'neumorphism'} onClick={() => setOpen(true)}>
+      <Button
+        variant={'neumorphism'}
+        className="relative w-full justify-start text-sm text-gray-900 dark:text-gray-100 sm:pr-12 md:w-40 lg:w-64"
+        onClick={() => setOpen(true)}
+      >
         <Search className="mr-2 h-4 w-4" />
         Search Cities
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Type a command or search..." />
+        <CommandInput
+          placeholder="Search Cities"
+          value={query}
+          onValueChange={setQuery}
+        />
         <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
+          {query.length > 2 && <CommandEmpty>No cities found.</CommandEmpty>}
           <CommandGroup heading="Suggestions">
             <CommandItem>Calendar</CommandItem>
             <CommandItem>Search Emoji</CommandItem>
