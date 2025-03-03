@@ -10,6 +10,8 @@ import {
   useWeatherQuery,
 } from '@/hooks/use-weather';
 import { AlertTriangle, MapPin, RefreshCw } from 'lucide-react';
+import WeatherDetails from '@/components/weather-details';
+import WeatherForecast from '@/components/weather-forecast';
 
 const WeatherDasboard = () => {
   const {
@@ -43,7 +45,11 @@ const WeatherDasboard = () => {
         <AlertTitle>Location Error</AlertTitle>
         <AlertDescription>
           <p>{locationError}</p>
-          <Button onClick={getLocation} variant="outline" className="w-fit">
+          <Button
+            onClick={getLocation}
+            variant="glassmorphism"
+            className="w-fit"
+          >
             <MapPin className="mr-2 h-4 w-4" />
             Enable Location
           </Button>
@@ -58,7 +64,11 @@ const WeatherDasboard = () => {
         <AlertTitle>Location Required</AlertTitle>
         <AlertDescription>
           <p>Enable location access to see your local weather.</p>
-          <Button onClick={getLocation} variant="outline" className="w-fit">
+          <Button
+            onClick={getLocation}
+            variant="glassmorphism"
+            className="w-fit"
+          >
             <MapPin className="mr-2 h-4 w-4" />
             Enable Location
           </Button>
@@ -76,7 +86,11 @@ const WeatherDasboard = () => {
         <AlertTitle>Error</AlertTitle>
         <AlertDescription>
           <p>Failed to fetch weather data. Please try again.</p>
-          <Button onClick={handleRefresh} variant="outline" className="w-fit">
+          <Button
+            onClick={handleRefresh}
+            variant="glassmorphism"
+            className="w-fit"
+          >
             <RefreshCw className="mr-2 h-4 w-4" />
             Retry
           </Button>
@@ -113,6 +127,7 @@ const WeatherDasboard = () => {
 
       <div className="grid gap-6">
         <div className="flex flex-col lg:flex-row gap-4">
+          {/* Current Weather */}
           <CurrentWeather
             data={weatherQuery.data}
             locationName={locationName}
@@ -120,9 +135,11 @@ const WeatherDasboard = () => {
           {/* Hourly Weather */}
           <HourlyTemperature data={forecastQuery.data} />
         </div>
-        <div>
+        <div className="grid gap-4 md:grid-cols-2 items-start">
           {/* Details */}
+          <WeatherDetails data={weatherQuery.data} />
           {/* Daily Forecast */}
+          <WeatherForecast data={forecastQuery.data} />
         </div>
       </div>
     </div>

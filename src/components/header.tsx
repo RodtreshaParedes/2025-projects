@@ -1,6 +1,7 @@
 import useTheme from '@/context/theme-hooks';
 import { Link } from 'react-router-dom';
 import { Moon, Sun } from 'lucide-react';
+import CitySearch from './city-search';
 
 const Header = () => {
   const { theme, setTheme } = useTheme();
@@ -20,6 +21,8 @@ const Header = () => {
 
         <div>
           {/* search */}
+          <CitySearch />
+
           {/* theme toggle */}
           <div
             onClick={() => setTheme(isLight ? 'dark' : 'light')}
