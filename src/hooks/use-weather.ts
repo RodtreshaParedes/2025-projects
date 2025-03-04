@@ -35,7 +35,7 @@ export function useReverseGeocodeQuery(coordinates: Coordinates | null) {
   });
 }
 
-export function useSearchLocationsQuery(query: string) {
+export function useLocationSearch(query: string) {
   return useQuery({
     queryKey: WEATHER_KEYS.search(query),
     queryFn: () => weatherAPI.searchLocations(query),
