@@ -26,7 +26,7 @@ function App() {
           <Layout>
             <Routes>
               <Route path="/" element={<WeatherDasboard />} />
-              <Route path="/city/:cityName" element={<CityPage />} />
+              <Route path="/city" element={<CityPage />} />
             </Routes>
           </Layout>
         </ThemeProvider>

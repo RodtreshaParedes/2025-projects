@@ -8,10 +8,11 @@ import {
   CommandItem,
   CommandList,
 } from './ui/command';
-import { Loader2, Search } from 'lucide-react';
+import { Loader2, Search, XCircle } from 'lucide-react';
 import { useLocationSearch } from '@/hooks/use-weather';
 import { CommandSeparator } from 'cmdk';
 import { useNavigate } from 'react-router-dom';
+import { useSearchHistory } from '@/hooks/use-search-history';
 
 const CitySearch = () => {
   const [open, setOpen] = useState(false);
@@ -19,11 +20,19 @@ const CitySearch = () => {
   const navigate = useNavigate();
 
   const { data: locations, isLoading } = useLocationSearch(query);
+  const { history, addToHistory, clearHistory } = useSearchHistory();
 
   const handlSelectLocation = (cityData: string) => {
     const [lat, lon, name, country] = cityData.split(' | ');
 
     // Add the city to the recent searches
+    addToHistory.mutate({
+      query,
+      name,
+      lat: parseFloat(lat),
+      lon: parseFloat(lon),
+      country,
+    });
 
     setOpen(false);
     navigate(`/city?name=${name}&country=${country}&lat=${lat}&lon=${lon}`);
@@ -53,11 +62,25 @@ const CitySearch = () => {
             <CommandItem>Calendar</CommandItem>
           </CommandGroup>
 
-          <CommandSeparator />
-
-          <CommandGroup heading="Recent Searches">
-            <CommandItem>Calendar</CommandItem>
-          </CommandGroup>
+          {history.length > 0 && (
+            <>
+              <CommandSeparator />
+              <CommandGroup>
+                <div>
+                  <p></p>
+                  <Button
+                    variant={'neumorphism'}
+                    size="sm"
+                    onClick={() => clearHistory.mutate()}
+                  >
+                    <XCircle className="h-4 w-4" />
+                    Clear
+                  </Button>
+                </div>
+                <CommandItem>Calendar</CommandItem>
+              </CommandGroup>
+            </>
+          )}
 
           <CommandSeparator />
 

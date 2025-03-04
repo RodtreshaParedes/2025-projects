@@ -106,6 +106,8 @@ const WeatherDasboard = () => {
   return (
     <div className="space-y-4">
       {/* Favorite Cities */}
+
+      {/* My Location */}
       <div className="flex justify-between items-center">
         <h1 className="text-xl font-poppins font-bold tracking-tight">
           My Location
