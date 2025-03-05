@@ -19,7 +19,7 @@ const buttonVariants = cva(
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
         glassmorphism:
-          'px-4 py-2 rounded-lg bg-white/10 dark:bg-gray-800/10 backdrop-blur-lg text-white shadow-md hover:bg-white/20 dark:hover:bg-gray-800/20 transition-colors',
+          'px-4 py-2 rounded-lg bg-white/10 dark:bg-gray-800/10 backdrop-blur-lg text-white shadow-md hover:bg-white/20 dark:hover:bg-gray-900 transition-colors',
         neumorphism:
           'p-2 rounded-lg bg-neutral-200 dark:bg-neutral-800 shadow-[14px_14px_28px] shadow-neutral-300 dark:shadow-neutral-900 shadow-inner text-black dark:text-white',
       },

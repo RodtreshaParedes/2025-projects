@@ -12,8 +12,9 @@ import {
 import { AlertTriangle, MapPin, RefreshCw } from 'lucide-react';
 import WeatherDetails from '@/components/weather-details';
 import WeatherForecast from '@/components/weather-forecast';
+import FavoriteCities from '@/components/favorite-cities';
 
-const WeatherDasboard = () => {
+const WeatherDashboard = () => {
   const {
     coordinates,
     error: locationError,
@@ -106,10 +107,11 @@ const WeatherDasboard = () => {
   return (
     <div className="space-y-4">
       {/* Favorite Cities */}
+      <FavoriteCities />
 
       {/* My Location */}
       <div className="flex justify-between items-center">
-        <h1 className="text-xl font-poppins font-bold tracking-tight">
+        <h1 className="text-2xl font-poppins font-bold tracking-tight">
           My Location
         </h1>
         <Button
@@ -148,4 +150,4 @@ const WeatherDasboard = () => {
   );
 };
 
-export default WeatherDasboard;
+export default WeatherDashboard;

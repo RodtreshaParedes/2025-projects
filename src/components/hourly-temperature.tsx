@@ -21,6 +21,17 @@ const HourlyTemperature = ({ data }: HourlyTemperatureProps) => {
     feels_like: Math.round(item.main.feels_like),
   }));
 
+  const tempValues = chartData.map((item) => item.temp);
+  const feelsLikeValues = chartData.map((item) => item.feels_like);
+  const minTemp = Math.min(...tempValues, ...feelsLikeValues);
+  const maxTemp = Math.max(...tempValues, ...feelsLikeValues);
+  const padding = 5; // Add some padding to the min and max values
+
+  const yAxisDomain = [
+    Math.floor(minTemp / 5) * 5 - padding,
+    Math.ceil(maxTemp / 5) * 5 + padding,
+  ];
+
   return (
     <Card className="flex-1">
       <CardHeader>
@@ -44,6 +55,7 @@ const HourlyTemperature = ({ data }: HourlyTemperatureProps) => {
                 tickLine={false}
                 axisLine={false}
                 tickFormatter={(value) => `${value}°`}
+                domain={yAxisDomain}
               />
 
               {/* Tooltip */}
