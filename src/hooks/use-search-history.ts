@@ -22,7 +22,8 @@ export function useSearchHistory() {
 
   const historyQuery = useQuery({
     queryKey: ['search-history'],
-    queryFn: () => 'history',
+    queryFn: () => history,
+    initialData: history,
   });
 
   const addToHistory = useMutation({
@@ -54,7 +55,7 @@ export function useSearchHistory() {
       setHistory([]);
       return [];
     },
-    onSuccess() {
+    onSuccess: () => {
       queryClient.setQueryData(['search-history'], []);
     },
   });
