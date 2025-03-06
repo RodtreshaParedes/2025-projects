@@ -9,12 +9,15 @@ interface FavoriteButtonProps {
 }
 
 const FavoriteButton = ({ data }: FavoriteButtonProps) => {
-  const { addFavorite, isFavorite, removeFavorite } = useFavorite();
+  const { addFavorite, isFavorite, removeFavorite, favorites } = useFavorite();
   const isCurrentlyFavorite = isFavorite(data.coord.lat, data.coord.lon);
 
   const handleToggleFavorite = () => {
-    if (isCurrentlyFavorite) {
-      removeFavorite.mutate(`${data.coord.lat}-${data.coord.lon}`);
+    const favoriteCity = favorites?.find(
+      (city) => city.lat === data.coord.lat && city.lon === data.coord.lon,
+    );
+    if (isCurrentlyFavorite && favoriteCity) {
+      removeFavorite.mutate(favoriteCity.id);
       toast.error(`Removed ${data.name} from Favorites`);
     } else {
       addFavorite.mutate({
