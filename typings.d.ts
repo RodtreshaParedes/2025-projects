@@ -19,6 +19,7 @@ export interface Movie {
   vote_count: number;
   release_date?: string;
   first_air_date?: string; // For TV shows
+  number_of_seasons?: string; // Only for TV Shows
   video?: boolean; // If it's a video
 }
 

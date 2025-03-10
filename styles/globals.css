@@ -4,7 +4,7 @@
 /* HTML, Body, Heading */
 @layer base {
   body {
-    @apply bg-gradient-to-br from-[#c7f4fb] via-[#f5e7fb] to-[#d7e7fd];
+    @apply bg-gradient-to-b from-[#c7f4fb] via-[#f5e7fb] to-[#d7e7fd] bg-fixed;
   }
 
   header {
@@ -15,6 +15,18 @@
 /* Custom classNames */
 @layer components {
   .headerLink {
-    @apply cursor-pointer text-sm font-light text-[#5e5e5] transition duration-[.4s] hover:underline underline-offset-8;
+    @apply cursor-pointer text-sm font-light text-gray-800 transition-transform duration-300 hover:scale-110 bg-gray-300/60 rounded-4xl py-1 px-5;
+  }
+
+  .bannerButton {
+    @apply flex items-center justify-center w-32 md:w-40 text-white px-4 md:px-6 py-1.5 md:py-2 rounded-full font-medium backdrop-blur-md transition text-sm md:text-base;
+  }
+
+  .text-shadow-md {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .glassmorphism-footer {
+    @apply bg-white/60 backdrop-blur-lg;
   }
 }

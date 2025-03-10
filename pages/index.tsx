@@ -3,6 +3,8 @@ import Header from '@/components/Header';
 import Head from 'next/head';
 import requests from '@/utils/requests';
 import { Movie } from '@/typings';
+import Row from '@/components/Row';
+import Footer from '@/components/Footer';
 
 export const getServerSideProps = async () => {
   try {
@@ -115,7 +117,7 @@ export default function Home({
   upcomingMovies,
 }: Props) {
   return (
-    <div className="relative h-screen bg-gradient-to-b from-[#e3f2fd] via-[#f5e7fb] to-[#fbf6eb] lg:h-[140vh]">
+    <div className="relative flex flex-col min-h-screen bg-gradient-to-b from-[#e3f2fd] via-[#f5e7fb] to-[#fbf6eb]">
       <Head>
         <title>CinemaVault by Rodtresha Paredes</title>
       </Head>
@@ -123,20 +125,31 @@ export default function Home({
       {/* Header */}
       <Header />
 
-      <main>
+      <main className="relative flex-grow pl-4 pb-24 lg:space-y-24 lg:pl-16">
         {/* Banner */}
         <Banner trending={trending} />
 
-        <section>
-          {/* Row */}
-          {/* Row */}
-          {/* Row */}
-          {/* Row */}
-          {/* Row */}
+        <section className="relative">
+          {/* Rows */}
+          {/* My List */}
+
+          <Row title="Trending Now" movies={trending} />
+          <Row title="Top Rated" movies={topRated} />
+          <Row title="Action Movies" movies={action} />
+          <Row title="Comedy Movies" movies={comedy} />
+          <Row title="Horror Movies" movies={horror} />
+          <Row title="Romance Movies" movies={romance} />
+          <Row title="Documentaries" movies={documentaries} />
+          <Row title="TV Shows" movies={tvShows} />
+          <Row title="Popular Movies" movies={popularMovies} />
+          <Row title="Upcoming Movies" movies={upcomingMovies} />
         </section>
       </main>
 
       {/* Modal */}
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
