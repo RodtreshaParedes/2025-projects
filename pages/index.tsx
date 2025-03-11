@@ -1,10 +1,10 @@
-import Banner from '@/components/Banner';
-import Header from '@/components/Header';
-import Head from 'next/head';
-import requests from '@/utils/requests';
-import { Movie } from '@/typings';
-import Row from '@/components/Row';
-import Footer from '@/components/Footer';
+import Banner from "@/components/Banner";
+import Header from "@/components/Header";
+import Head from "next/head";
+import requests from "@/utils/requests";
+import { Movie } from "@/typings";
+import Row from "@/components/Row";
+import Footer from "@/components/Footer";
 
 export const getServerSideProps = async () => {
   try {
@@ -73,7 +73,7 @@ export const getServerSideProps = async () => {
       },
     };
   } catch (error) {
-    console.error('Error fetching TMDB data:', error);
+    console.error("Error fetching TMDB data:", error);
     return {
       props: {
         trending: [],
@@ -117,7 +117,7 @@ export default function Home({
   upcomingMovies,
 }: Props) {
   return (
-    <div className="relative flex flex-col min-h-screen bg-gradient-to-b from-[#e3f2fd] via-[#f5e7fb] to-[#fbf6eb]">
+    <div className="relative flex min-h-screen flex-col bg-gradient-to-b from-[#e3f2fd] via-[#f5e7fb] to-[#fbf6eb]">
       <Head>
         <title>CinemaVault by Rodtresha Paredes</title>
       </Head>
@@ -125,7 +125,7 @@ export default function Home({
       {/* Header */}
       <Header />
 
-      <main className="relative flex-grow pl-4 pb-24 lg:space-y-24 lg:pl-16">
+      <main className="relative flex-grow pb-24 pl-4 lg:space-y-24 lg:pl-16">
         {/* Banner */}
         <Banner trending={trending} />
 

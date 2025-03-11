@@ -1,32 +1,49 @@
-@import "tailwindcss";
+  @import "tailwindcss";
 
+  /* HTML, Body, Heading */
+  @layer base {
+    body {
+      @apply bg-gradient-to-b from-[#c7f4fb] via-[#f5e7fb] to-[#d7e7fd] bg-fixed;
+    }
 
-/* HTML, Body, Heading */
-@layer base {
-  body {
-    @apply bg-gradient-to-b from-[#c7f4fb] via-[#f5e7fb] to-[#d7e7fd] bg-fixed;
+    header {
+      @apply fixed top-0 z-50 flex w-full items-center justify-between px-6 py-4 transition-all lg:px-9 lg:py-5;
+    }
   }
 
-  header {
-    @apply fixed top-0 z-50 flex w-full items-center justify-between px-6 py-4 transition-all lg:px-9 lg:py-5;
-  }
-}
+  /* Custom classNames */
+  @layer components {
+    .headerLink {
+      @apply rounded-4xl cursor-pointer bg-gray-300/60 px-5 py-1 text-sm font-light text-gray-800 transition-transform duration-300 hover:scale-110;
+    }
 
-/* Custom classNames */
-@layer components {
-  .headerLink {
-    @apply cursor-pointer text-sm font-light text-gray-800 transition-transform duration-300 hover:scale-110 bg-gray-300/60 rounded-4xl py-1 px-5;
-  }
+    .bannerButton {
+      @apply flex w-32 items-center justify-center rounded-full px-4 py-1.5 text-sm font-medium text-white backdrop-blur-md transition md:w-40 md:px-6 md:py-2 md:text-base;
+    }
 
-  .bannerButton {
-    @apply flex items-center justify-center w-32 md:w-40 text-white px-4 md:px-6 py-1.5 md:py-2 rounded-full font-medium backdrop-blur-md transition text-sm md:text-base;
-  }
-
-  .text-shadow-md {
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    .glassmorphism-footer {
+      @apply bg-white/60 backdrop-blur-lg;
+    }
   }
 
-  .glassmorphism-footer {
-    @apply bg-white/60 backdrop-blur-lg;
+  @layer utilities {
+    .text-shadow-md {
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4), 0px -1px 2px rgba(255, 255, 255, 0.3);
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #e0cbcb;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #c0a0b9;
+    }
   }
-}

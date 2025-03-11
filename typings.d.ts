@@ -58,7 +58,7 @@ export interface MovieDetails extends Movie {
 }
 
 export interface Element {
-  type: 'Trailer' | 'Teaser' | 'Clip' | 'Featurette';
+  type: "Trailer" | "Teaser" | "Clip" | "Featurette";
   id: string;
   key: string; // YouTube video key
   name: string;

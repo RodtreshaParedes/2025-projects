@@ -1,8 +1,8 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { IoSearchOutline } from 'react-icons/io5';
-import { IoMdArrowDropdown } from 'react-icons/io';
-import { useEffect, useState } from 'react';
+import Image from "next/image";
+import Link from "next/link";
+import { IoSearchOutline } from "react-icons/io5";
+import { IoMdArrowDropdown } from "react-icons/io";
+import { useEffect, useState } from "react";
 
 function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -16,18 +16,18 @@ function Header() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   return (
-    <header className={`${isScrolled && 'bg-white/30 backdrop-blur-lg'}`}>
+    <header className={`${isScrolled && "bg-white/30 backdrop-blur-lg"}`}>
       <div className="flex items-center space-x-0.5 md:space-x-20">
         <Image
-          src={'/cinemavault.png'}
+          src={"/cinemavault.png"}
           alt="header-logo"
           width={100}
           height={100}
@@ -44,17 +44,17 @@ function Header() {
       </div>
 
       <div className="flex items-center space-x-4">
-        <div className="relative hidden xl:flex items-center">
+        <div className="relative hidden items-center xl:flex">
           <input
             type="text"
             placeholder="Search..."
-            className="bg-gray-300/60 rounded-full pl-10 py-2 px-3 w-full focus:outline-none"
+            className="w-full rounded-full bg-gray-300/60 px-3 py-2 pl-10 focus:outline-none"
           />
-          <IoSearchOutline className="absolute sm:inline left-3 h-6 w-6 pointer-events-none" />
+          <IoSearchOutline className="pointer-events-none absolute left-3 h-6 w-6 sm:inline" />
         </div>
         <div className="flex items-center">
           <Link href="/account">
-            <Image src={'/avatar.png'} alt="avatar" width={50} height={50} />
+            <Image src={"/avatar.png"} alt="avatar" width={50} height={50} />
           </Link>
           <IoMdArrowDropdown className="h-6 w-6 cursor-pointer text-gray-700" />
         </div>
