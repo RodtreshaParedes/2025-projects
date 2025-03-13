@@ -1,35 +1,44 @@
-  @import "tailwindcss";
-  @plugin "tailwind-scrollbar";
-  @plugin "tailwind-scrollbar-hide";
+@import url('https://fonts.googleapis.com/css2?family=Cantata+One&display=swap');
+@import "tailwindcss";
+@plugin "tailwind-scrollbar";
+@plugin "tailwind-scrollbar-hide";
 
-  /* HTML, Body, Heading */
-  @layer base {
-    body {
-      @apply bg-gradient-to-b from-[#c7f4fb] via-[#f5e7fb] to-[#d7e7fd] bg-fixed scrollbar-thin scrollbar-track-transparent scrollbar-thumb-yellow-200;
-    }
-
-    header {
-      @apply fixed top-0 z-50 flex w-full items-center justify-between px-6 py-4 transition-all lg:px-9 lg:py-5;
-    }
+/* HTML, Body, Heading */
+@layer base {
+  body {
+    @apply bg-gradient-to-b from-[#e3f2fd] via-[#f5e7fb] to-[#fbf6eb] bg-fixed scrollbar-thin scrollbar-track-transparent scrollbar-thumb-amber-200;
   }
 
-  /* Custom classNames */
-  @layer components {
-    .headerLink {
-      @apply rounded-4xl cursor-pointer bg-gray-300/60 px-5 py-1 text-sm font-light text-gray-800 transition-transform duration-300 hover:scale-110;
-    }
+  header {
+    @apply fixed top-0 z-50 flex w-full items-center justify-between px-6 py-4 transition-all lg:px-9 lg:py-5;
+  }
+}
 
-    .bannerButton {
-      @apply flex w-32 items-center justify-center rounded-full px-4 py-1.5 text-sm font-medium text-white backdrop-blur-md transition md:w-40 md:px-6 md:py-2 md:text-base;
-    }
-
-    .glassmorphism-footer {
-      @apply bg-white/60 backdrop-blur-lg;
-    }
+/* Custom classNames */
+@layer components {
+  .headerLink {
+    @apply rounded-4xl cursor-pointer bg-gray-300/60 px-5 py-1 text-sm font-light text-gray-800 transition-transform duration-300 hover:scale-110;
   }
 
-  @layer utilities {
-    .text-shadow-md {
-      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4), 0px -1px 2px rgba(255, 255, 255, 0.3);
-    }
+  .bannerButton {
+    @apply flex w-32 items-center justify-center rounded-full px-4 py-1.5 text-sm font-medium text-white backdrop-blur-md transition md:w-40 md:px-6 md:py-2 md:text-base;
   }
+
+  .glassmorphism-footer {
+    @apply bg-white/60 backdrop-blur-lg;
+  }
+
+  .authInput {
+    @apply mb-4 w-full md:w-[30vw] rounded-md border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-500
+  }
+}
+
+@layer utilities {
+  .text-shadow-md {
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4), 0px -1px 2px rgba(255, 255, 255, 0.3);
+  }
+
+  .cantata-one {
+    font-family: 'Cantata One', serif;
+  }
+}

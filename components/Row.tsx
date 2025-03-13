@@ -74,11 +74,11 @@ function Row({ title, movies }: Props) {
         {title}
       </h2>
 
-      <div className="relative md:-ml-2">
+      <div className="relative overflow-hidden md:-ml-2">
         {isMoved && (
           <MdArrowBackIos
             size={40}
-            className="absolute left-0 top-1/2 z-40 -translate-y-1/2 cursor-pointer rounded-full bg-white/30 p-2 text-white shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-110"
+            className="absolute left-0 top-1/2 z-40 -translate-y-1/2 cursor-pointer rounded-full bg-white/30 p-2 text-white opacity-0 shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-110 group-hover:opacity-100"
             onClick={() => handleClick("left")}
           />
         )}
@@ -104,7 +104,7 @@ function Row({ title, movies }: Props) {
         {!isEnd && (
           <MdArrowForwardIos
             size={40}
-            className="absolute right-0 top-1/2 z-40 -translate-y-1/2 cursor-pointer rounded-full bg-white/30 p-2 text-white shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-110"
+            className="absolute right-0 top-1/2 z-40 -translate-y-1/2 cursor-pointer rounded-full bg-white/30 p-2 text-white opacity-0 shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-110 group-hover:opacity-100"
             onClick={() => handleClick("right")}
           />
         )}

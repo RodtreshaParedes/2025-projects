@@ -117,9 +117,9 @@ export default function Home({
   upcomingMovies,
 }: Props) {
   return (
-    <div className="relative flex min-h-screen flex-col bg-gradient-to-b from-[#e3f2fd] via-[#f5e7fb] to-[#fbf6eb]">
+    <div className="relative flex min-h-screen flex-col">
       <Head>
-        <title>CinemaVault by Rodtresha Paredes</title>
+        <title>Homepage | CinemaVault</title>
       </Head>
 
       {/* Header */}
