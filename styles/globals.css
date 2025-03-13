@@ -1,9 +1,11 @@
   @import "tailwindcss";
+  @plugin "tailwind-scrollbar";
+  @plugin "tailwind-scrollbar-hide";
 
   /* HTML, Body, Heading */
   @layer base {
     body {
-      @apply bg-gradient-to-b from-[#c7f4fb] via-[#f5e7fb] to-[#d7e7fd] bg-fixed;
+      @apply bg-gradient-to-b from-[#c7f4fb] via-[#f5e7fb] to-[#d7e7fd] bg-fixed scrollbar-thin scrollbar-track-transparent scrollbar-thumb-yellow-200;
     }
 
     header {
@@ -29,21 +31,5 @@
   @layer utilities {
     .text-shadow-md {
       text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4), 0px -1px 2px rgba(255, 255, 255, 0.3);
-    }
-
-    .scrollbar-hide::-webkit-scrollbar {
-      display: none;
-    }
-
-    ::-webkit-scrollbar {
-      width: 10px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: #e0cbcb;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: #c0a0b9;
     }
   }
