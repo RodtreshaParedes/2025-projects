@@ -55,7 +55,7 @@ function Row({ title, movies }: Props) {
       rotateY: [0, 30, 0], //Reduced rotation amount
       opacity: [1, 0, 1],
       transformOrigin: "center",
-      transition: { delay: index * 0.03, duration: 0.5, ease: "easeInOut" },
+      transition: { delay: index * 0.03, duration: 0.9, ease: "easeInOut" },
       onComplete: () => {
         if (rowRef.current) {
           setIsMoved(rowRef.current.scrollLeft > 0);
@@ -69,7 +69,7 @@ function Row({ title, movies }: Props) {
   };
 
   return (
-    <div className="group h-52 space-y-2">
+    <div className="group h-60 space-y-2">
       <h2 className="w-56 cursor-pointer text-sm font-semibold text-gray-800 transition duration-200 hover:text-neutral-600 md:text-2xl">
         {title}
       </h2>

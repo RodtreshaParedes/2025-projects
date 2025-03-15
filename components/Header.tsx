@@ -24,7 +24,7 @@ function Header() {
   }, []);
 
   return (
-    <header className={`${isScrolled && "bg-white/30 backdrop-blur-lg"}`}>
+    <header className={`${isScrolled && "bg-[#ffffff12] backdrop-blur-lg"}`}>
       <div className="flex items-center space-x-0.5 md:space-x-20">
         <Image
           src={"/cinemavault.png"}
@@ -48,7 +48,7 @@ function Header() {
           <input
             type="text"
             placeholder="Search..."
-            className="w-full rounded-full bg-gray-300/60 px-3 py-2 pl-10 focus:outline-none"
+            className="w-full rounded-full bg-[#d1d5dc88] px-3 py-2 pl-10 focus:outline-none"
           />
           <IoSearchOutline className="pointer-events-none absolute left-3 h-6 w-6 sm:inline" />
         </div>
@@ -56,7 +56,7 @@ function Header() {
           <Link href="/account">
             <Image src={"/avatar.png"} alt="avatar" width={50} height={50} />
           </Link>
-          <IoMdArrowDropdown className="h-6 w-6 cursor-pointer text-gray-700" />
+          <IoMdArrowDropdown className="h-6 w-6 cursor-pointer text-[#364153]" />
         </div>
       </div>
     </header>

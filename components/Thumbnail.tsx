@@ -19,7 +19,7 @@ function Thumbnail({ movie }: Props) {
       />
 
       {/* Movie Title (Bottom Left) */}
-      <div className="absolute bottom-0 left-0 w-full rounded bg-gradient-to-t from-black/70 to-transparent p-2">
+      <div className="thumbnail-name absolute bottom-0 left-0 w-full rounded p-2">
         <p className="text-xs font-semibold text-white md:text-sm">
           {movie.title || movie.name}
         </p>

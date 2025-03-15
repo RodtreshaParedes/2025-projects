@@ -45,11 +45,11 @@ function Banner({ trending }: Props) {
 
     for (let i = 1; i <= 5; i++) {
       if (i <= ratingOutOfFive) {
-        stars.push(<FaStar key={i} className="text-yellow-400" />); // Full star
+        stars.push(<FaStar key={i} className="text-[#FFD700]" />); // Full star
       } else if (i - 0.5 <= ratingOutOfFive) {
-        stars.push(<FaStarHalfAlt key={i} className="text-yellow-400" />); // Half star
+        stars.push(<FaStarHalfAlt key={i} className="text-[#FFD700]" />); // Half star
       } else {
-        stars.push(<FaRegStar key={i} className="text-gray-400" />); // Empty star
+        stars.push(<FaRegStar key={i} className="text-[#B0B0B0]" />); // Empty star
       }
     }
 
@@ -77,7 +77,7 @@ function Banner({ trending }: Props) {
           objectFit="cover"
           objectPosition="center"
         />
-        <div className="absolute bottom-0 left-0 h-[500px] w-full bg-gradient-to-b from-transparent to-[#efeafb]"></div>
+        <div className="banner-overlay absolute bottom-0 left-0 h-[500px] w-full"></div>
       </div>
 
       <motion.div
@@ -99,15 +99,15 @@ function Banner({ trending }: Props) {
           className="relative z-10 flex gap-3 md:gap-4"
           variants={slideInLeft}
         >
-          <button className="bannerButton gap-2 bg-black/60 hover:bg-black/40 md:gap-3">
-            <span className="-ml-3 flex h-7 w-7 items-center justify-center rounded-full bg-gray-400/20 md:-ml-4 md:h-9 md:w-9">
+          <button className="bannerButton cursor-pointer gap-2 bg-[#000000b7] hover:bg-[#00000030] md:gap-3">
+            <span className="-ml-3 flex h-7 w-7 items-center justify-center rounded-full bg-[#2a28289d] md:-ml-4 md:h-9 md:w-9">
               <CiPlay1 className="text-base text-white md:text-lg" />
             </span>
             Play Show
           </button>
 
-          <button className="bannerButton gap-2 bg-gray-400/40 hover:bg-neutral-400/30 md:gap-4">
-            <span className="-ml-3 flex h-7 w-7 items-center justify-center rounded-full bg-gray-400/30 md:-ml-5 md:h-9 md:w-9">
+          <button className="bannerButton cursor-pointer gap-2 bg-[#666666aa] hover:bg-[#a1a1a181] md:gap-4">
+            <span className="-ml-3 flex h-7 w-7 items-center justify-center rounded-full bg-[#6a728253] md:-ml-5 md:h-9 md:w-9">
               <TfiInfoAlt className="text-base text-white md:text-lg" />
             </span>
             More Info
@@ -119,7 +119,7 @@ function Banner({ trending }: Props) {
           className="relative z-10 flex items-center gap-2 text-lg font-semibold text-white"
           variants={slideInLeft}
         >
-          <span className="text-sm text-gray-300 md:text-base">
+          <span className="text-sm text-[#d1d5dc] md:text-base">
             {movie?.release_date?.slice(0, 4) ||
               movie?.first_air_date?.slice(0, 4)}{" "}
             | {seasons ? `${seasons} Seasons` : ""}
