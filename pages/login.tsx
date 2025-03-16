@@ -57,9 +57,9 @@ function Login() {
       </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="relative flex w-full flex-col justify-center p-8 sm:p-16 md:w-1/2"
+        className="relative flex w-full flex-col items-center justify-center p-8 sm:p-16 md:w-1/2"
       >
-        <div className="absolute top-0 flex items-center justify-center p-8">
+        <div className="absolute top-0 flex items-center p-8">
           <Image
             src="/cinemavault.png"
             alt="Main Logo"
@@ -109,7 +109,7 @@ function Login() {
           </div>
 
           {/* Remember me and Forgot Password */}
-          <div className="mb-6 flex w-full max-w-md items-center justify-between">
+          <div className="mb-6 mt-2 flex w-full max-w-md items-center justify-between">
             <label className="flex items-center font-light">
               <input type="checkbox" className="mr-2" />
               Remember me
