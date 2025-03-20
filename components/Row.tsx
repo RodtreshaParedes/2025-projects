@@ -95,7 +95,7 @@ function Row({ title, movies }: Props) {
         {title}
       </h2>
 
-      <div className="relative overflow-hidden md:-ml-4">
+      <div className="relative overflow-hidden md:-ml-10">
         {isMoved && (
           <MdArrowBackIos
             size={40}

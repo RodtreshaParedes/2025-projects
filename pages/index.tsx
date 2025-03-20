@@ -5,6 +5,10 @@ import requests from "@/utils/requests";
 import { Movie } from "@/typings";
 import Row from "@/components/Row";
 import Footer from "@/components/Footer";
+import useAuth from "@/hooks/useAuth";
+import { useRecoilValue } from "recoil";
+import { modalState } from "@/atoms/modalAtom";
+import Modal from "@/components/Modal";
 
 export const getServerSideProps = async () => {
   try {
@@ -116,6 +120,11 @@ export default function Home({
   popularMovies,
   upcomingMovies,
 }: Props) {
+  const { loading } = useAuth();
+  const showModal = useRecoilValue(modalState);
+
+  if (loading) return null;
+
   return (
     <div className="relative flex min-h-screen flex-col">
       <Head>
@@ -147,6 +156,7 @@ export default function Home({
       </main>
 
       {/* Modal */}
+      {showModal && <Modal />}
 
       {/* Footer */}
       <Footer />
