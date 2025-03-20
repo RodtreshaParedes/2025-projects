@@ -9,7 +9,7 @@ interface Props {
 
 function Thumbnail({ movie }: Props) {
   return (
-    <div className="h-30 relative min-w-[170px] cursor-pointer transition duration-200 ease-out md:h-36 md:min-w-[255px] md:hover:scale-105">
+    <div className="h-30 relative min-w-[165px] cursor-pointer transition duration-200 ease-out md:h-36 md:min-w-[213.8px] md:hover:scale-105">
       {/* Movie Image */}
       <Image
         src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path || movie.poster_path}`}

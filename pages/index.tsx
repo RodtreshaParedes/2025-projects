@@ -125,7 +125,7 @@ export default function Home({
       {/* Header */}
       <Header />
 
-      <main className="relative flex-grow pb-24 pl-4 lg:space-y-24 lg:pl-16">
+      <main className="relative flex-grow pb-24 pl-10 lg:space-y-24 lg:pl-16">
         {/* Banner */}
         <Banner trending={trending} />
 

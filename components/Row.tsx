@@ -1,8 +1,8 @@
-import { Movie } from "@/typings";
+import { useState, useEffect, useRef } from "react";
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 import Thumbnail from "./Thumbnail";
-import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { Movie } from "@/typings";
 
 interface Props {
   title: string;
@@ -14,18 +14,39 @@ function Row({ title, movies }: Props) {
   const [isMoved, setIsMoved] = useState(false);
   const [isEnd, setIsEnd] = useState(false);
   const [animationTrigger, setAnimationTrigger] = useState(0);
+  // Set default scroll count to 6 for larger screens.
+  const [thumbnailsPerScroll, setThumbnailsPerScroll] = useState(6);
+
+  // Update thumbnailsPerScroll based on screen size.
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
+    const updateThumbnailsPerScroll = () => {
+      setThumbnailsPerScroll(mediaQuery.matches ? 3 : 6);
+    };
+    updateThumbnailsPerScroll();
+    mediaQuery.addEventListener("change", updateThumbnailsPerScroll);
+    return () => {
+      mediaQuery.removeEventListener("change", updateThumbnailsPerScroll);
+    };
+  }, []);
 
   const handleClick = (direction: string) => {
     if (!rowRef.current) return;
 
-    const { scrollLeft, clientWidth } = rowRef.current;
+    // Query the first thumbnail container to get its width.
+    const thumbnailElement = rowRef.current.querySelector("div.relative");
+    const thumbnailWidth = thumbnailElement
+      ? thumbnailElement.clientWidth
+      : rowRef.current.clientWidth / thumbnailsPerScroll;
+
+    const scrollAmount = thumbnailWidth * thumbnailsPerScroll;
+    const { scrollLeft } = rowRef.current;
     const scrollTo =
       direction === "left"
-        ? scrollLeft - clientWidth
-        : scrollLeft + clientWidth;
+        ? scrollLeft - scrollAmount
+        : scrollLeft + scrollAmount;
 
     rowRef.current.scrollTo({ left: scrollTo, behavior: "smooth" });
-
     setAnimationTrigger((prev) => prev + 1);
   };
 
@@ -36,7 +57,7 @@ function Row({ title, movies }: Props) {
     const handleScroll = () => {
       setIsMoved(scrollElement.scrollLeft > 0);
       setIsEnd(
-        scrollElement.scrollLeft + scrollElement.clientWidth + 10 >= // Added buffer
+        scrollElement.scrollLeft + scrollElement.clientWidth + 10 >=
           scrollElement.scrollWidth,
       );
     };
@@ -52,7 +73,7 @@ function Row({ title, movies }: Props) {
   const thumbnailVariants = {
     default: { rotateY: 0, opacity: 1, transformOrigin: "center" },
     rotate: (index: number) => ({
-      rotateY: [0, 30, 0], //Reduced rotation amount
+      rotateY: [0, 30, 0],
       opacity: [1, 0, 1],
       transformOrigin: "center",
       transition: { delay: index * 0.03, duration: 0.9, ease: "easeInOut" },
@@ -74,7 +95,7 @@ function Row({ title, movies }: Props) {
         {title}
       </h2>
 
-      <div className="relative overflow-hidden md:-ml-2">
+      <div className="relative overflow-hidden md:-ml-4">
         {isMoved && (
           <MdArrowBackIos
             size={40}
@@ -85,7 +106,7 @@ function Row({ title, movies }: Props) {
 
         <div
           ref={rowRef}
-          className="scrollbar-hide flex items-center gap-x-4 overflow-x-scroll px-4 md:p-2 md:px-6"
+          className="scrollbar-hide -px-2 flex items-center overflow-x-scroll md:px-10"
         >
           {movies.map((movie, index) => (
             <motion.div
@@ -94,7 +115,7 @@ function Row({ title, movies }: Props) {
               variants={thumbnailVariants}
               initial="default"
               animate="rotate"
-              className="relative"
+              className="relative px-1 py-4"
             >
               <Thumbnail movie={movie} />
             </motion.div>
