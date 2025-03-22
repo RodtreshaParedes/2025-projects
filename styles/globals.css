@@ -1,72 +1,77 @@
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
 
 @import "tailwindcss";
+
 @plugin "tailwind-scrollbar";
 @plugin "tailwind-scrollbar-hide";
 @plugin 'tailwindcss-animate';
 
 /* HTML, Body, Heading */
 @layer base {
-  body {
-    background-image: linear-gradient(to bottom, #e3f2fd, #f5e7fb, #fbf6eb);
-    background-attachment: fixed;
-  }
+    body {
+        background-image: linear-gradient(to bottom, #e3f2fd, #f5e7fb, #fbf6eb);
+        background-attachment: fixed;
+    }
 
-  header {
-    @apply fixed top-0 z-50 flex w-full items-center justify-between px-6 py-4 transition-all lg:px-9 lg:py-5;
-  }
+    header {
+        @apply fixed top-0 z-50 flex w-full items-center justify-between px-6 py-4 transition-all lg:px-9 lg:py-5;
+    }
 }
 
 /* Custom classNames */
 @layer components {
-  .headerLink {
-    @apply rounded-4xl cursor-pointer bg-[#d1d5dc88] px-5 py-1 text-sm font-light text-gray-800 transition-transform duration-300 hover:scale-110;
-  }
+    .headerLink {
+        @apply rounded-4xl cursor-pointer bg-[#d1d5dc88] px-5 py-1 text-sm font-light text-gray-800 transition-transform duration-300 hover:scale-110;
+    }
 
-  .banner-overlay {
-    background-image: linear-gradient(to bottom, transparent, #f7ebf7);
-  }
+    .banner-overlay {
+        background-image: linear-gradient(to bottom, transparent, #f7ebf7);
+    }
 
-  .bannerButton {
-    @apply flex w-32 items-center justify-center rounded-full px-4 py-1.5 text-sm font-medium text-white backdrop-blur-md transition md:w-40 md:px-6 md:py-2 md:text-base;
-  }
+    .bannerButton {
+        @apply flex w-32 items-center justify-center rounded-full px-4 py-1.5 text-sm font-medium text-white backdrop-blur-md transition md:w-40 md:px-6 md:py-2 md:text-base;
+    }
 
-  .glassmorphism-footer {
-    @apply bg-[#ffffff95] backdrop-blur-lg;
-  }
+    .glassmorphism-footer {
+        @apply bg-[#ffffff95] backdrop-blur-lg;
+    }
 
-  .authInput {
-    @apply w-full md:w-[30vw] rounded-md border-none outline-none bg-gray-300 focus:bg-gray-200 transition-all;
-  }
+    .authInput {
+        @apply w-full md:w-[30vw] rounded-md border-none outline-none bg-gray-300 focus:bg-gray-200 transition-all;
+    }
+
+    .modalButton {
+        @apply flex h-11 w-11 items-center justify-center rounded-full border-2 border-gray-400 bg-white/10 shadow-lg backdrop-blur-md transition hover:border-white hover:bg-white;
+    }
 }
 
 @layer utilities {
-  .text-shadow-md {
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4), 0px -1px 2px rgba(255, 255, 255, 0.3);
-  }
+    .text-shadow-md {
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4), 0px -1px 2px rgba(255, 255, 255, 0.3);
+    }
 
-  .abril-fatface-regular {
-    font-family: "Abril Fatface", serif;
-  }
+    .abril-fatface-regular {
+        font-family: "Abril Fatface", serif;
+    }
 
-  .thumbnail-name {
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-  }
+    .thumbnail-name {
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    }
 
-  ::-webkit-scrollbar {
-    width: 10px;
-    /* Adjust width as needed */
-  }
+    ::-webkit-scrollbar {
+        width: 10px;
+        /* Adjust width as needed */
+    }
 
-  ::-webkit-scrollbar-thumb {
-    background-color: #fee685;
-    /* Your desired color */
-    border-radius: 5px;
-    /* Optional: rounded corners */
-  }
+    ::-webkit-scrollbar-thumb {
+        background-color: #fee685;
+        /* Your desired color */
+        border-radius: 5px;
+        /* Optional: rounded corners */
+    }
 
-  ::-webkit-scrollbar-track {
-    background-color: #f1f1f1;
-    /* Track background color */
-  }
+    ::-webkit-scrollbar-track {
+        background-color: #f1f1f1;
+        /* Track background color */
+    }
 }
