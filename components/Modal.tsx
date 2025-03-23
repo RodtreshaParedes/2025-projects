@@ -3,12 +3,15 @@ import {useModal} from "@/context/ModalContext";
 import {XIcon} from "lucide-react";
 import {useEffect, useState} from "react";
 import {Element, Genre} from "@/typings"
+import ReactPlayer from "react-player/lazy";
+import {CiPlay1} from "react-icons/ci";
 
 function Modal() {
     const {showModal, setShowModal, currentMovie} = useModal(); // Get movie from context
     const [movieData, setMovieData] = useState(null);
     const [trailer, setTrailer] = useState("");
     const [genres, setGenres] = useState<Genre[]>([])
+    const [muted, setMuted] = useState(false)
 
     useEffect(() => {
         if (!currentMovie) return; // Ensure we have a movie selected
@@ -45,15 +48,30 @@ function Modal() {
     };
 
     return (
-        <MuiModal open={showModal} onClose={handleClose}>
+        <MuiModal open={showModal} onClose={handleClose}
+                  className="fixed !top-7 left-0 right-0 z-50 mx-auto w-full max-w-5xl overflow-y-scroll">
             <>
                 <button onClick={handleClose}
                         className="modalButton absolute right-5 top-5 !z-40 h-9 w-9 border-none bg-[#a1a1a181] hover:bg-[#a1a1a181]">
                     <XIcon className="h-6 w-6 text-white cursor-pointer"/>
                 </button>
 
-                <div>
+                <div className="relative pt-[56.25%]">
+                    <ReactPlayer
+                        url={`https://www.youtube.com/watch?v=${trailer}`}
+                        width="100%"
+                        height="100%"
+                        style={{position: 'absolute', top: '0', left: '0'}}
+                        playing
+                        muted={muted}
+                    />
+                </div>
 
+                <div>
+                    <button className="flex items-center gap-x-4 rounded">
+                        <CiPlay1 className="h-7 w-7 text-white"/>
+                        Play
+                    </button>
                 </div>
             </>
         </MuiModal>
