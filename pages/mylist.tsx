@@ -20,14 +20,17 @@ const Mylist = () => {
             setMovies(
                 myList.map((doc) => ({
                     id: doc.id,
-                    title: doc.title || doc.name,
-                    overview: doc.overview || "",
+                    title: doc.title || doc.name || "Untitled",
+                    overview: doc.overview || "No overview available.",
                     poster_path: doc.poster_path || "",
                     backdrop_path: doc.backdrop_path || "",
                     vote_average: doc.vote_average || 0,
-                    release_date: doc.release_date || "",
+                    release_date: doc.release_date || "Unknown",
                     original_language: doc.original_language || "en",
                     media_type: doc.media_type || "movie",
+                    genre_ids: doc.genre_ids || [], // Default to an empty array
+                    popularity: doc.popularity || 0, // Default to 0
+                    vote_count: doc.vote_count || 0, // Default to 0
                 }))
             );
         }
@@ -74,3 +77,4 @@ const Mylist = () => {
 };
 
 export default Mylist;
+

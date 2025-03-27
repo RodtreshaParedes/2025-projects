@@ -50,7 +50,7 @@ const Search = () => {
 
             <main className="relative flex-grow p-6 overflow-y-scroll scrollbar-hide mt-20">
                 <h1 className="text-2xl font-semibold text-white mb-4">
-                    Search Results for: <span className="text-gray-300">"{query}"</span>
+                    Search Results for: <span className="text-gray-300">&quot;{query}&quot;</span>
                 </h1>
 
                 {loading ? (
