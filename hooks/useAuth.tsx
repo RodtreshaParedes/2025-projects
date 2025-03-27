@@ -13,7 +13,8 @@ import {auth, db} from "@/firebase";
 import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert";
 import {Terminal} from "lucide-react";
 import {FirebaseError} from "firebase/app";
-import {doc, setDoc} from "@firebase/firestore";
+import {doc, getDoc, setDoc} from "@firebase/firestore";
+
 
 interface IAuth {
     user: User | null;
@@ -72,26 +73,34 @@ export const AuthProvider = ({children}: AuthProviderProps) => {
         firstName: string,
         lastName: string,
         email: string,
-        password: string,
+        password: string
     ) => {
         setLoading(true);
         setError(null);
+
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
 
-            // Set display name
-            await updateProfile(user, {displayName: `${firstName} ${lastName}`});
+            // Update display name
+            await updateProfile(user, { displayName: `${firstName} ${lastName}` });
 
-            // Create Firestore user document
-            await setDoc(doc(db, "users", user.uid), {
-                uid: user.uid,
-                firstName,
-                lastName,
-                email,
-                createdAt: new Date(),
-            });
+            // Check if Firestore write is needed (to avoid duplicate error)
+            const userDocRef = doc(db, "users", user.uid);
+            const docSnap = await getDoc(userDocRef);
 
+            if (!docSnap.exists()) {
+                // Create Firestore user document
+                await setDoc(userDocRef, {
+                    uid: user.uid,
+                    firstName,
+                    lastName,
+                    email,
+                    createdAt: new Date().toISOString(),
+                });
+            }
+
+            // Redirect to login after successful signup
             router.push("/login");
         } catch (error) {
             if (error instanceof FirebaseError) {
@@ -103,6 +112,7 @@ export const AuthProvider = ({children}: AuthProviderProps) => {
             setLoading(false);
         }
     };
+
 
     const signIn = async (email: string, password: string): Promise<void> => {
         setLoading(true);
