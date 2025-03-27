@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {Movie} from "@/typings";
+import {Movie, SearchResult} from "@/typings";
 import Thumbnail from "@/components/Thumbnail";
 import requests from "@/utils/requests";
 import {useRouter} from "next/router";
@@ -25,9 +25,22 @@ const Search = () => {
                 const data = await res.json();
 
                 // Filter only movies & TV shows (ignore people)
-                const filteredResults = data.results.filter(
-                    (item: any) => item.media_type === "movie" || item.media_type === "tv"
-                );
+                const filteredResults = (data.results as SearchResult[])
+                    .filter((item) => item.media_type === "movie" || item.media_type === "tv")
+                    .map((item) => ({
+                        id: item.id ?? 0, // Ensure `id` is a number
+                        title: item.title || item.name || "Unknown Title",
+                        overview: item.overview || "",
+                        poster_path: item.poster_path || "",
+                        backdrop_path: item.backdrop_path || "",
+                        vote_average: item.vote_average ?? 0,
+                        release_date: item.release_date || "",
+                        original_language: item.original_language || "en",
+                        media_type: item.media_type || "movie",
+                        genre_ids: item.genre_ids || [], // Ensure it's an array
+                        popularity: item.popularity ?? 0,
+                        vote_count: item.vote_count ?? 0,
+                    })) as Movie[];
 
                 setSearchResults(filteredResults);
             } catch (error) {
