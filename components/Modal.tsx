@@ -224,7 +224,7 @@ function Modal() {
 
                         {/* Movie Description */}
                         <div className="flex flex-col gap-x-10 gap-y-4 font-light md:flex-row text-white mt-3">
-                            <p className="w-[380px] md:w-[650px]">{movieData?.overview || "No description available."}</p>
+                            <p className="w-[365px] md:w-[650px]">{movieData?.overview || "No description available."}</p>
                             <div className="flex flex-col space-y-3 text-sm">
                                 <div>
                                     <span className="text-gray-400">Genres: </span>
