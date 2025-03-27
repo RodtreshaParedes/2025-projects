@@ -224,7 +224,7 @@ function Modal() {
 
                         {/* Movie Description */}
                         <div className="flex flex-col gap-x-10 gap-y-4 font-light md:flex-row text-white mt-3">
-                            <p className="w-5/6">{movieData?.overview || "No description available."}</p>
+                            <p className="w-[420px] md:w-[650px]">{movieData?.overview || "No description available."}</p>
                             <div className="flex flex-col space-y-3 text-sm">
                                 <div>
                                     <span className="text-gray-400">Genres: </span>
@@ -243,23 +243,28 @@ function Modal() {
                             </div>
                         </div>
 
-                        {/* Cast Section */}
-                        <div className="mt-6">
+                        {/* Scrollable Cast Section */}
+                        <div className="mt-6 max-w-[400px] md:max-w-[900px] mx-auto">
+                            {/* Fixed Heading */}
                             <h3 className="text-lg font-semibold text-white mb-3">Top Cast</h3>
-                            <div className="flex overflow-x-auto space-x-4 scrollbar-hide">
-                                {cast.map((member, index) => (
-                                    <div key={index} className="flex flex-col items-center text-center">
-                                        <img
-                                            src={member.profile_path
-                                                ? `https://image.tmdb.org/t/p/w185${member.profile_path}`
-                                                : "/default-avatar.png"}
-                                            alt={member.name}
-                                            className="w-20 h-20 rounded-full object-cover border border-gray-600"
-                                        />
-                                        <p className="text-white text-sm mt-1">{member.name}</p>
-                                        <p className="text-gray-400 text-xs">{member.character}</p>
-                                    </div>
-                                ))}
+
+                            {/* Scrollable Cast List */}
+                            <div className="relative w-full overflow-hidden">
+                                <div className="flex overflow-x-auto overflow-y-hidden scrollbar-hide scroll-smooth snap-x space-x-4 px-4 w-full max-w-full">
+                                    {cast.map((member, index) => (
+                                        <div key={index} className="flex flex-col items-center text-center min-w-[90px] snap-start">
+                                            <img
+                                                src={member.profile_path
+                                                    ? `https://image.tmdb.org/t/p/w185${member.profile_path}`
+                                                    : "/default-avatar.png"}
+                                                alt={member.name}
+                                                className="w-20 h-20 rounded-full object-cover border border-gray-600"
+                                            />
+                                            <p className="text-white text-sm mt-1">{member.name}</p>
+                                            <p className="text-gray-400 text-xs">{member.character}</p>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     </div>
