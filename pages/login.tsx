@@ -1,182 +1,182 @@
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
 } from "@/components/ui/form";
 import useAuth from "@/hooks/useAuth";
 import Head from "next/head";
 import Image from "next/image";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { Input } from "@/components/ui/input";
-import { Loader2 } from "lucide-react";
-import { useState } from "react";
+import {SubmitHandler, useForm} from "react-hook-form";
+import {Input} from "@/components/ui/input";
+import {Loader2} from "lucide-react";
+import {useState} from "react";
 
 interface Inputs {
-  email: string;
-  password: string;
+    email: string;
+    password: string;
 }
 
 function Login() {
-  const [loading, setLoading] = useState(false); // Track loading state
-  const { signIn, navigateTo } = useAuth();
-  const methods = useForm<Inputs>();
+    const [loading, setLoading] = useState(false); // Track loading state
+    const {signIn, navigateTo} = useAuth();
+    const methods = useForm<Inputs>();
 
-  const {
-    register,
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = methods;
+    const {
+        register,
+        handleSubmit,
+        control,
+        formState: {errors},
+    } = methods;
 
-  const onSubmit: SubmitHandler<Inputs> = async ({ email, password }) => {
-    setLoading(true); // Start loading
-    await signIn(email, password);
-    setLoading(false); // Stop loading
-  };
+    const onSubmit: SubmitHandler<Inputs> = async ({email, password}) => {
+        setLoading(true); // Start loading
+        await signIn(email, password);
+        setLoading(false); // Stop loading
+    };
 
-  return (
-    <div className="relative flex h-screen w-screen">
-      <Head>
-        <title>CinemaVault</title>
-      </Head>
-      <div className="relative hidden w-1/2 md:flex">
-        <Image
-          src="/auth.jpg"
-          alt="Auth Image"
-          layout="fill"
-          objectFit="cover"
-          className="rounded-4xl px-2 py-2"
-        />
-        <div className="absolute left-10 top-10 flex items-center text-gray-900">
-          <h2 className="text-xl font-light">A WISE QUOTE</h2>
-          <div className="w-25 ml-5 h-0.5 rounded-full bg-[#101828]"></div>
-        </div>
-        <div className="absolute bottom-10 left-10 text-gray-900">
-          <h1 className="abril-fatface-regular text-4xl font-bold tracking-wider">
-            Life Is Too Short
-          </h1>
-          <p className="mt-2 font-light">
-            Don&apos;t waste your time on negative people. Focus on those who
-            uplift and inspire you.
-          </p>
-        </div>
-      </div>
-      <Form {...methods}>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="relative flex w-full flex-col items-center justify-center p-8 sm:p-16 md:w-1/2"
-        >
-          <div className="absolute top-0 flex items-center p-8">
-            <Image
-              src="/cinemavault.png"
-              alt="Main Logo"
-              width={70}
-              height={70}
-            />
-          </div>
-
-          <div className="flex w-full flex-col items-center">
-            <h1 className="abril-fatface-regular mb-4 text-center text-3xl font-bold tracking-wider">
-              Welcome Back
-            </h1>
-            <p className="mb-6 text-center font-light text-gray-600">
-              Enter your email and password to access your account.
-            </p>
-
-            <div className="w-full max-w-md">
-              <FormField
-                control={control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="mt-2">Email</FormLabel>
-                    <FormControl>
-                      <Input
-                        className="authInput !important bg-gray-300 py-5 focus:bg-gray-200"
-                        style={{ outline: "none", boxShadow: "none" }}
-                        placeholder="Enter your email"
-                        {...field}
-                        {...register("email", {
-                          required: "Email is required",
-                        })}
-                      />
-                    </FormControl>
-                    <FormMessage className="text-orange-500">
-                      {errors.email?.message}
-                    </FormMessage>
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="mt-2">Password</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="password"
-                        className="authInput !important bg-gray-300 py-5 focus:bg-gray-200"
-                        style={{ outline: "none", boxShadow: "none" }}
-                        placeholder="Enter your password"
-                        {...field}
-                        {...register("password", {
-                          required: "Password is required",
-                        })}
-                      />
-                    </FormControl>
-                    <FormMessage className="text-orange-500">
-                      {errors.password?.message}
-                    </FormMessage>
-                  </FormItem>
-                )}
-              />
+    return (
+        <div className="relative flex h-screen w-screen">
+            <Head>
+                <title>CinemaVault</title>
+            </Head>
+            <div className="relative hidden w-1/2 md:flex">
+                <Image
+                    src="/auth.jpg"
+                    alt="Auth Image"
+                    layout="fill"
+                    objectFit="cover"
+                    className="rounded-4xl px-2 py-2"
+                />
+                <div className="absolute left-10 top-10 flex items-center text-gray-900">
+                    <h2 className="text-xl font-light">A WISE QUOTE</h2>
+                    <div className="w-25 ml-5 h-0.5 rounded-full bg-[#101828]"></div>
+                </div>
+                <div className="absolute bottom-10 left-10 text-gray-900">
+                    <h1 className="abril-fatface-regular text-4xl font-bold tracking-wider">
+                        Life Is Too Short
+                    </h1>
+                    <p className="mt-2 font-light">
+                        Don&apos;t waste your time on negative people. Focus on those who
+                        uplift and inspire you.
+                    </p>
+                </div>
             </div>
-
-            <div className="mb-6 mt-2 flex w-full max-w-md items-center justify-between">
-              <label className="flex items-center font-light">
-                <input type="checkbox" className="mr-2" />
-                Remember me
-              </label>
-              <a href="#" className="font-light text-[#1e90ff]">
-                Forgot Password
-              </a>
-            </div>
-
-            <button
-              className="mb-4 flex w-full max-w-md items-center justify-center rounded-md bg-black py-3 text-white transition-colors duration-200 hover:bg-[#1e232999]"
-              type="submit"
-              disabled={loading} // ✅ Disable button when loading
-            >
-              {loading ? (
-                <Loader2 className="h-5 w-5 animate-spin text-white" />
-              ) : (
-                "Sign In"
-              )}
-            </button>
-
-            <div className="text-center font-light">
-              <p>
-                Don&apos;t have an account?{" "}
-                <button
-                  className="text-[#1e90ff] underline-offset-2 hover:underline"
-                  onClick={(e) => {
-                    e.preventDefault(); // ⛔ Prevents the form from submitting
-                    navigateTo("/signup"); // ✅ Navigates to signup page
-                  }}
+            <Form {...methods}>
+                <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className="relative flex w-full flex-col items-center justify-center p-8 sm:p-16 md:w-1/2"
                 >
-                  Sign Up
-                </button>
-              </p>
-            </div>
-          </div>
-        </form>
-      </Form>
-    </div>
-  );
+                    <div className="absolute top-0 flex items-center p-8">
+                        <Image
+                            src="/cinemavault.png"
+                            alt="Main Logo"
+                            width={70}
+                            height={70}
+                        />
+                    </div>
+
+                    <div className="flex w-full flex-col items-center">
+                        <h1 className="abril-fatface-regular mb-4 text-center text-3xl font-bold tracking-wider">
+                            Welcome Back
+                        </h1>
+                        <p className="mb-6 text-center font-light text-gray-600">
+                            Enter your email and password to access your account.
+                        </p>
+
+                        <div className="w-full max-w-md">
+                            <FormField
+                                control={control}
+                                name="email"
+                                render={({field}) => (
+                                    <FormItem>
+                                        <FormLabel className="mt-2">Email</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                className="authInput !important bg-gray-300 py-5 focus:bg-gray-200"
+                                                style={{outline: "none", boxShadow: "none"}}
+                                                placeholder="Enter your email"
+                                                {...field}
+                                                {...register("email", {
+                                                    required: "Email is required",
+                                                })}
+                                            />
+                                        </FormControl>
+                                        <FormMessage className="text-orange-500">
+                                            {errors.email?.message}
+                                        </FormMessage>
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={control}
+                                name="password"
+                                render={({field}) => (
+                                    <FormItem>
+                                        <FormLabel className="mt-2">Password</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                type="password"
+                                                className="authInput !important bg-gray-300 py-5 focus:bg-gray-200"
+                                                style={{outline: "none", boxShadow: "none"}}
+                                                placeholder="Enter your password"
+                                                {...field}
+                                                {...register("password", {
+                                                    required: "Password is required",
+                                                })}
+                                            />
+                                        </FormControl>
+                                        <FormMessage className="text-orange-500">
+                                            {errors.password?.message}
+                                        </FormMessage>
+                                    </FormItem>
+                                )}
+                            />
+                        </div>
+
+                        <div className="mb-6 mt-2 flex w-full max-w-md items-center justify-between">
+                            <label className="flex items-center font-light">
+                                <input type="checkbox" className="mr-2"/>
+                                Remember me
+                            </label>
+                            <a href="#" className="font-light text-[#1e90ff]">
+                                Forgot Password
+                            </a>
+                        </div>
+
+                        <button
+                            className="mb-4 flex w-full max-w-md items-center justify-center rounded-md bg-black py-3 text-white transition-colors duration-200 hover:bg-[#1e232999]"
+                            type="submit"
+                            disabled={loading} // ✅ Disable button when loading
+                        >
+                            {loading ? (
+                                <Loader2 className="h-5 w-5 animate-spin text-white"/>
+                            ) : (
+                                "Sign In"
+                            )}
+                        </button>
+
+                        <div className="text-center font-light">
+                            <p>
+                                Don&apos;t have an account?{" "}
+                                <button
+                                    className="text-[#1e90ff] underline-offset-2 hover:underline cursor-pointer"
+                                    onClick={(e) => {
+                                        e.preventDefault(); // ⛔ Prevents the form from submitting
+                                        navigateTo("/signup"); // ✅ Navigates to signup page
+                                    }}
+                                >
+                                    Sign Up
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                </form>
+            </Form>
+        </div>
+    );
 }
 
 export default Login;

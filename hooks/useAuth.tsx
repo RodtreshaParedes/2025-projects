@@ -9,10 +9,11 @@ import {
 
 import {useRouter} from "next/router";
 import {useState, useEffect, useMemo, useContext, createContext} from "react";
-import {auth} from "../firebase";
+import {auth, db} from "@/firebase";
 import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert";
 import {Terminal} from "lucide-react";
 import {FirebaseError} from "firebase/app";
+import {doc, setDoc} from "@firebase/firestore";
 
 interface IAuth {
     user: User | null;
@@ -76,14 +77,22 @@ export const AuthProvider = ({children}: AuthProviderProps) => {
         setLoading(true);
         setError(null);
         try {
-            const userCredential = await createUserWithEmailAndPassword(
-                auth,
-                email,
-                password,
-            );
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
+
+            // Set display name
             await updateProfile(user, {displayName: `${firstName} ${lastName}`});
-            router.push("/signup");
+
+            // Create Firestore user document
+            await setDoc(doc(db, "users", user.uid), {
+                uid: user.uid,
+                firstName,
+                lastName,
+                email,
+                createdAt: new Date(),
+            });
+
+            router.push("/login");
         } catch (error) {
             if (error instanceof FirebaseError) {
                 setError(error.message || "An unknown error occurred.");

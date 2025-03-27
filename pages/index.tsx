@@ -6,8 +6,9 @@ import {Movie} from "@/typings";
 import Row from "@/components/Row";
 import Footer from "@/components/Footer";
 import useAuth from "@/hooks/useAuth";
-import {useModal} from "@/context/ModalContext"
+import {useModal} from "@/context/ModalContext";
 import Modal from "@/components/Modal";
+import useList from "@/hooks/useList";
 
 export const getServerSideProps = async () => {
     try {
@@ -20,9 +21,20 @@ export const getServerSideProps = async () => {
             horrorRes,
             romanceRes,
             documentariesRes,
-            tvShowsRes,
             popularMoviesRes,
             upcomingMoviesRes,
+            sciFiMoviesRes, // Fetch Sci-Fi Movies
+
+            // TV Shows
+            trendingTVRes,
+            topRatedTVRes,
+            actionTVRes,
+            comedyTVRes,
+            horrorTVRes,
+            romanceTVRes,
+            documentaryTVRes,
+            popularTVRes,
+            sciFiTVRes, // Fetch Sci-Fi TV Shows
         ] = await Promise.all([
             fetch(requests.fetchTrending),
             fetch(requests.fetchTopRated),
@@ -31,9 +43,20 @@ export const getServerSideProps = async () => {
             fetch(requests.fetchHorrorMovies),
             fetch(requests.fetchRomanceMovies),
             fetch(requests.fetchDocumentaries),
-            fetch(requests.fetchTVShows),
             fetch(requests.fetchPopularMovies),
             fetch(requests.fetchUpcomingMovies),
+            fetch(requests.fetchSciFiMovies), // Fetch Sci-Fi Movies
+
+            // TV Shows
+            fetch(requests.fetchTrendingTV),
+            fetch(requests.fetchTopRatedTV),
+            fetch(requests.fetchActionTV),
+            fetch(requests.fetchComedyTV),
+            fetch(requests.fetchHorrorTV),
+            fetch(requests.fetchRomanceTV),
+            fetch(requests.fetchDocumentaryTV),
+            fetch(requests.fetchPopularTV),
+            fetch(requests.fetchSciFiTV), // Fetch Sci-Fi TV Shows
         ]);
 
         // Convert responses to JSON
@@ -45,9 +68,20 @@ export const getServerSideProps = async () => {
             horror,
             romance,
             documentaries,
-            tvShows,
             popularMovies,
             upcomingMovies,
+            sciFiMovies, // Sci-Fi Movies
+
+            // TV Shows
+            trendingTV,
+            topRatedTV,
+            actionTV,
+            comedyTV,
+            horrorTV,
+            romanceTV,
+            documentaryTV,
+            popularTV,
+            sciFiTV, // Sci-Fi TV Shows
         ] = await Promise.all([
             trendingRes.json(),
             topRatedRes.json(),
@@ -56,9 +90,20 @@ export const getServerSideProps = async () => {
             horrorRes.json(),
             romanceRes.json(),
             documentariesRes.json(),
-            tvShowsRes.json(),
             popularMoviesRes.json(),
             upcomingMoviesRes.json(),
+            sciFiMoviesRes.json(), // Sci-Fi Movies
+
+            // TV Shows
+            trendingTVRes.json(),
+            topRatedTVRes.json(),
+            actionTVRes.json(),
+            comedyTVRes.json(),
+            horrorTVRes.json(),
+            romanceTVRes.json(),
+            documentaryTVRes.json(),
+            popularTVRes.json(),
+            sciFiTVRes.json(), // Sci-Fi TV Shows
         ]);
 
         return {
@@ -70,9 +115,20 @@ export const getServerSideProps = async () => {
                 horror: horror.results || [],
                 romance: romance.results || [],
                 documentaries: documentaries.results || [],
-                tvShows: tvShows.results || [],
                 popularMovies: popularMovies.results || [],
                 upcomingMovies: upcomingMovies.results || [],
+                sciFiMovies: sciFiMovies.results || [], // Sci-Fi Movies
+
+                // TV Shows
+                trendingTV: trendingTV.results || [],
+                topRatedTV: topRatedTV.results || [],
+                actionTV: actionTV.results || [],
+                comedyTV: comedyTV.results || [],
+                horrorTV: horrorTV.results || [],
+                romanceTV: romanceTV.results || [],
+                documentaryTV: documentaryTV.results || [],
+                popularTV: popularTV.results || [],
+                sciFiTV: sciFiTV.results || [], // Sci-Fi TV Shows
             },
         };
     } catch (error) {
@@ -86,9 +142,20 @@ export const getServerSideProps = async () => {
                 horror: [],
                 romance: [],
                 documentaries: [],
-                tvShows: [],
                 popularMovies: [],
                 upcomingMovies: [],
+                sciFiMovies: [], // Sci-Fi Movies
+
+                // TV Shows (fallback)
+                trendingTV: [],
+                topRatedTV: [],
+                actionTV: [],
+                comedyTV: [],
+                horrorTV: [],
+                romanceTV: [],
+                documentaryTV: [],
+                popularTV: [],
+                sciFiTV: [], // Sci-Fi TV Shows
             },
         };
     }
@@ -102,9 +169,20 @@ interface Props {
     horror: Movie[];
     romance: Movie[];
     documentaries: Movie[];
-    tvShows: Movie[];
     popularMovies: Movie[];
     upcomingMovies: Movie[];
+    sciFiMovies: Movie[]; // Sci-Fi Movies
+
+    // TV Shows
+    trendingTV: Movie[];
+    topRatedTV: Movie[];
+    actionTV: Movie[];
+    comedyTV: Movie[];
+    horrorTV: Movie[];
+    romanceTV: Movie[];
+    documentaryTV: Movie[];
+    popularTV: Movie[];
+    sciFiTV: Movie[]; // Sci-Fi TV Shows
 }
 
 export default function Home({
@@ -115,12 +193,24 @@ export default function Home({
                                  horror,
                                  romance,
                                  documentaries,
-                                 tvShows,
                                  popularMovies,
                                  upcomingMovies,
+                                 sciFiMovies,
+
+                                 // TV Shows
+                                 trendingTV,
+                                 topRatedTV,
+                                 actionTV,
+                                 comedyTV,
+                                 horrorTV,
+                                 romanceTV,
+                                 documentaryTV,
+                                 popularTV,
+                                 sciFiTV
                              }: Props) {
-    const {loading} = useAuth();
+    const {loading, user} = useAuth();
     const {showModal} = useModal();
+    const myList = useList(user?.uid);
 
     if (loading) return null;
 
@@ -138,19 +228,31 @@ export default function Home({
                 <Banner trending={trending}/>
 
                 <section className="relative">
-                    {/* Rows */}
-                    {/* My List */}
+                    {/* My List Component */}
+                    {myList.length > 0 && <Row title="My List" movies={myList as Movie[]}/>}
 
+                    {/* Rows for Movies */}
                     <Row title="Trending Now" movies={trending}/>
                     <Row title="Top Rated" movies={topRated}/>
                     <Row title="Action Movies" movies={action}/>
                     <Row title="Comedy Movies" movies={comedy}/>
                     <Row title="Horror Movies" movies={horror}/>
                     <Row title="Romance Movies" movies={romance}/>
+                    <Row title="Sci-Fi Movies" movies={sciFiMovies}/>
                     <Row title="Documentaries" movies={documentaries}/>
-                    <Row title="TV Shows" movies={tvShows}/>
                     <Row title="Popular Movies" movies={popularMovies}/>
                     <Row title="Upcoming Movies" movies={upcomingMovies}/>
+
+                    {/* Rows for TV Shows */}
+                    <Row title="Trending TV Shows" movies={trendingTV}/>
+                    <Row title="Top Rated TV Shows" movies={topRatedTV}/>
+                    <Row title="Action TV Shows" movies={actionTV}/>
+                    <Row title="Comedy TV Shows" movies={comedyTV}/>
+                    <Row title="Horror TV Shows" movies={horrorTV}/>
+                    <Row title="Romance TV Shows" movies={romanceTV}/>
+                    <Row title="Sci-Fi & Fantasy TV Shows" movies={sciFiTV}/>
+                    <Row title="Documentary TV Shows" movies={documentaryTV}/>
+                    <Row title="Popular TV Shows" movies={popularTV}/>
                 </section>
             </main>
 
@@ -162,3 +264,4 @@ export default function Home({
         </div>
     );
 }
+

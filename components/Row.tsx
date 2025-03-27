@@ -88,7 +88,7 @@ function Row({title, movies}: Props) {
 
     return (
         <div className="h-50 group md:h-60">
-            <h2 className="w-56 cursor-pointer text-sm font-semibold text-gray-800 transition duration-200 hover:text-neutral-600 md:text-2xl">
+            <h2 className="w-72 cursor-pointer text-sm font-semibold text-gray-800 transition duration-200 hover:text-neutral-600 md:text-2xl">
                 {title}
             </h2>
 

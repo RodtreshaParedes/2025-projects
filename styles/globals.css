@@ -41,7 +41,7 @@
     }
 
     .modalButton {
-        @apply flex h-11 w-11 items-center justify-center rounded-full border-2 border-gray-400 bg-white/10 shadow-lg backdrop-blur-md transition hover:border-white hover:bg-gray-700;
+        @apply flex h-11 w-11 items-center justify-center rounded-full border-2 border-gray-400 bg-white/40 shadow-lg backdrop-blur-md transition hover:border-white hover:bg-gray-700/40;
     }
 }
 
